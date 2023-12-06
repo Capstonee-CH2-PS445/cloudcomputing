@@ -12,10 +12,3 @@ router.get('/token', refreshToken);
 router.delete('/logout', Logout);
 
 export default router;
-
-<<<<<<< HEAD
-=======
-// faisal test
-
-// test semua
->>>>>>> d27213c6add706bc0ee1f657c30b631b882019ef
