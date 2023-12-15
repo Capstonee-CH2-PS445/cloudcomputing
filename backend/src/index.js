@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./config/Database.js";
 import router from "./routes/route.js";
+import { verifyToken } from "./middleware/VerifyToken.js";
 dotenv.config();
     
 const app = express();
@@ -14,8 +15,11 @@ try {
     console.error(error);
 }
 
+app.use(verifyToken);
 app.use(cors({ credentials:true, origin: 'http://localhost:5000' }));
 app.use(cookieParser());
+
+app.use(verifyToken);
 
 app.use(express.json());
 app.use(router);
