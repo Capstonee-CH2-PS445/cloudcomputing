@@ -4,52 +4,39 @@ import jwt from "jsonwebtoken";
 
 export const getUsers = async (req, res) => {
     try {
-        const users = await Users.findAll({
-            attributes: ['id', 'name', 'email']
-        });
-        res.json(users);
+        // Cek apakah pengguna sudah login
+        if (req.user) {
+            // Jika sudah login, hanya tampilkan informasi pengguna yang login
+            res.json(req.user);
+        } else {
+            // Jika belum login, tampilkan semua data pengguna
+            const users = await Users.findAll({
+                attributes: ['id', 'name', 'email']
+            });
+            res.json(users);
+        }
     } catch (error) {
         console.log(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
     }
 }
 
-
 export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-
-    // Validasi input
-    if (!name || !email || !password || !confPassword) {
-        return res.status(400).json({ msg: "Harap isi semua field" });
-    }
-
-    if (password !== confPassword) {
-        return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
-    }
-
+    if (password !== confPassword) return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
+    const salt = await bcrypt.genSalt();
+    const hashPassword = await bcrypt.hash(password, salt);
     try {
-        // Periksa apakah email sudah terdaftar
-        const existingUser = await Users.findOne({ email: email });
-        if (existingUser) {
-            return res.status(400).json({ msg: "Email sudah terdaftar" });
-        }
-
-        // Buat pengguna baru
-        const salt = await bcrypt.genSalt();
-        const hashPassword = await bcrypt.hash(password, salt);
-
         await Users.create({
             name: name,
             email: email,
             password: hashPassword
         });
-
         res.json({ msg: "Register Berhasil" });
     } catch (error) {
-        console.log("Error:", error);
-        res.status(500).json({ msg: "Terjadi kesalahan server" });
+        console.log(error);
     }
-};
-
+}
 
 export const Login = async (req, res) => {
     try {
