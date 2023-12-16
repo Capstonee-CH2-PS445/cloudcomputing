@@ -24,40 +24,40 @@ export const getUsers = async (req, res) => {
 
 export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-  
+
     // Periksa apakah password dan confirmPassword cocok
     if (password !== confPassword) {
-      return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
+        return res.status(400).json({ msg: "Password dan Confirm Password tidak cocok" });
     }
-  
+
     try {
-      // Periksa apakah email atau username sudah ada dalam database
-      const existingUser = await Users.findOne({
-        where: {
-          [Op.or]: [{ email: email }, { name: name }]
+        // Periksa apakah email atau username sudah ada dalam database
+        const existingUser = await Users.findOne({
+            where: {
+                [Op.or]: [{ email: email }, { name: name }]
+            }
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ msg: "Email atau username sudah digunakan" });
         }
-      });
-  
-      if (existingUser) {
-        return res.status(400).json({ msg: "Email atau username sudah digunakan" });
-      }
-  
-      // Jika email atau username belum ada, buat entri baru
-      const salt = await bcrypt.genSalt();
-      const hashPassword = await bcrypt.hash(password, salt);
-  
-      await Users.create({
-        name: name,
-        email: email,
-        password: hashPassword
-      });
-  
-      res.json({ msg: "Register Berhasil" });
+
+        // Jika email atau username belum ada, buat entri baru
+        const salt = await bcrypt.genSalt();
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        await Users.create({
+            name: name,
+            email: email,
+            password: hashPassword
+        });
+
+        res.json({ msg: "Register Berhasil" });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ msg: "Terjadi kesalahan server" });
+        console.log(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
     }
-  };
+};
 
 export const Login = async (req, res) => {
     try {
@@ -72,7 +72,7 @@ export const Login = async (req, res) => {
         const name = user[0].name;
         const email = user[0].email;
         const accessToken = jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '20s'
+            expiresIn: '12h'
         });
         const refreshToken = jwt.sign({ userId, name, email }, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'

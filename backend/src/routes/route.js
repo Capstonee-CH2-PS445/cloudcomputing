@@ -2,7 +2,7 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import { addBook,  updateBook, deleteBook, getBooks, addBookmark, removeBookmark } from "../controllers/BookController.js";
+import { addBook, updateBook, deleteBook, getBooks, addBookmark, removeBookmark, getBookById } from "../controllers/BookController.js";
 
 const router = express.Router();
 
@@ -19,5 +19,6 @@ router.put('/books/:bookId', updateBook);
 router.delete('/books/:bookId', verifyToken, deleteBook);
 router.post('/books/:bookId/bookmark', addBookmark);
 router.delete('/books/:bookId/bookmark', removeBookmark);
+router.get('/books/:bookId', getBookById);
 
 export default router;

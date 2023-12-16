@@ -105,3 +105,22 @@ export const removeBookmark = async (req, res) => {
         res.status(500).json({ msg: "Terjadi kesalahan server" });
     }
 };
+
+export const getBookById = async (req, res) => {
+    const { bookId } = req.params;
+
+    try {
+        const book = await Book.findByPk(bookId, {
+            attributes: ['id', 'title', 'author', 'description', 'isBookmarked']
+        });
+
+        if (!book) {
+            return res.status(404).json({ msg: "Buku tidak ditemukan" });
+        }
+
+        res.json(book);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
+    }
+};
