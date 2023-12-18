@@ -6,7 +6,7 @@ import db from "./config/Database.js";
 import router from "./routes/route.js";
 import { verifyToken } from "./middleware/VerifyToken.js";
 dotenv.config();
-    
+
 const app = express();
 try {
     await db.authenticate();
@@ -15,8 +15,14 @@ try {
     console.error(error);
 }
 
+app.get('/', (req, res) => {
+    res.send({
+        message: "YUHU"
+    })
+})
+
 app.use(verifyToken);
-app.use(cors({ credentials:true, origin: 'http://localhost:5000' }));
+app.use(cors({ credentials: true, origin: 'http://localhost:5000' }));
 app.use(cookieParser());
 
 app.use(verifyToken);
