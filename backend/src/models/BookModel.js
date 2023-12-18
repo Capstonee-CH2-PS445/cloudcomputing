@@ -8,7 +8,8 @@ const { DataTypes } = Sequelize;
 const Book = db.define('books', {
     id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        foreignKey: true,
     },
     id: {
         type: DataTypes.INTEGER,
@@ -45,10 +46,6 @@ const Book = db.define('books', {
     small_image_url: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    isBookmarked: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
     },
     isCurrentlyReading: {
         type: DataTypes.BOOLEAN,
