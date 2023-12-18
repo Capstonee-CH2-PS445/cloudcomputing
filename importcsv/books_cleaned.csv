@@ -1,4 +1,4 @@
-id_user,id,book_id,isbn,authors,original_publication_year,title,average_rating,ratings_count,small_image_url
+,id,book_id,isbn,authors,original_publication_year,title,average_rating,ratings_count,small_image_url
 0,1,2767052,439023483,Suzanne Collins,2008.0,"The Hunger Games (The Hunger Games, #1)",4.34,4780653,https://images.gr-assets.com/books/1447303603s/2767052.jpg
 1,2,3,439554934,"J.K. Rowling, Mary GrandPré",1997.0,"Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",4.44,4602479,https://images.gr-assets.com/books/1474154022s/3.jpg
 2,3,41865,316015849,Stephenie Meyer,2005.0,"Twilight (Twilight, #1)",3.57,3866839,https://images.gr-assets.com/books/1361039443s/41865.jpg

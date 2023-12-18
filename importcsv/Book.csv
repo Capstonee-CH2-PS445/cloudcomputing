@@ -1,0 +1,10 @@
+﻿id_user,id,book_id,isbn,authors,original_publication_year,title,average_rating,ratings_count,small_image_url
+0,1,2767052,439023483,Suzanne Collins,2008.0,"The Hunger Games (The Hunger Games, #1)",4.34,4780653,https://images.gr-assets.com/books/1447303603s/2767052.jpg
+1,2,3,439554934,"J.K. Rowling, Mary GrandPré",1997.0,"Harry Potter and the Sorcerer's Stone (Harry Potter, #1)",4.44,4602479,https://images.gr-assets.com/books/1474154022s/3.jpg
+2,3,41865,316015849,Stephenie Meyer,2005.0,"Twilight (Twilight, #1)",3.57,3866839,https://images.gr-assets.com/books/1361039443s/41865.jpg
+3,4,2657,61120081,Harper Lee,1960.0,To Kill a Mockingbird,4.25,3198671,https://images.gr-assets.com/books/1361975680s/2657.jpg
+4,5,4671,743273567,F. Scott Fitzgerald,1925.0,The Great Gatsby,3.89,2683664,https://images.gr-assets.com/books/1490528560s/4671.jpg
+5,6,11870085,525478817,John Green,2012.0,The Fault in Our Stars,4.26,2346404,https://images.gr-assets.com/books/1360206420s/11870085.jpg
+6,7,5907,618260307,J.R.R. Tolkien,1937.0,The Hobbit,4.25,2071616,https://images.gr-assets.com/books/1372847500s/5907.jpg
+7,8,5107,316769177,J.D. Salinger,1951.0,The Catcher in the Rye,3.79,2044241,https://images.gr-assets.com/books/1398034300s/5107.jpg
+8,9,960,1416524797,Dan Brown,2000.0,"Angels & Demons  (Robert Langdon, #1)",3.85,2001311,https://images.gr-assets.com/books/1303390735s/960.jpg
