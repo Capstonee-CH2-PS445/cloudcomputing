@@ -13,7 +13,7 @@ steps:
 
 # Step 4: Push the Docker image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/ReadRave']
+  args: ['push', 'gcr.io/$PROJECT_ID/ReadRave:latest']
 
 # Step 5: Deploy the application (adjust as needed)
 - name: 'gcr.io/cloud-builders/gcloud'
