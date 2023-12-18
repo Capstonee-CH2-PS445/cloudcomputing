@@ -1,0 +1,23 @@
+steps:
+# Step 1: Install dependencies
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+
+# Step 2: Build the Node.js application
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build']
+
+# Step 3: Build the Docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/ReadRave', '.']
+
+# Step 4: Push the Docker image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/ReadRave']
+
+# Step 5: Deploy the application (adjust as needed)
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']
+
+images:
+- 'gcr.io/$PROJECT_ID/ReadRave'
