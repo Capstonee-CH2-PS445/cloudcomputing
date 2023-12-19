@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import db from "./config/Database.js";
 import router from "./routes/route.js";
 import { verifyToken } from "./middleware/VerifyToken.js";
@@ -22,7 +21,6 @@ app.get('/', (req, res) => {
 })
 
 app.use(verifyToken);
-app.use(cors({ credentials: true, origin: 'http://localhost:5000' }));
 app.use(cookieParser());
 
 app.use(verifyToken);
@@ -30,4 +28,4 @@ app.use(verifyToken);
 app.use(express.json());
 app.use(router);
 
-app.listen(5000, () => console.log('Server running at port 5000'));
+app.listen(8080, () => console.log('Server running at port 8080'));
