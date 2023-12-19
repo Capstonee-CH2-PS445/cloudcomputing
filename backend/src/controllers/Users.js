@@ -68,7 +68,7 @@ export const Login = async (req, res) => {
         });
         const match = await bcrypt.compare(req.body.password, user[0].password);
         if (!match) return res.status(400).json({ msg: "Wrong Password" });
-        const userId = user[0].id;
+        const userId = user[0].id_user;
         const name = user[0].name;
         const email = user[0].email;
         const accessToken = jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
@@ -79,7 +79,7 @@ export const Login = async (req, res) => {
         });
         await Users.update({ refresh_token: refreshToken }, {
             where: {
-                id: userId
+                id_user: userId
             }
         });
         res.cookie('refreshToken', refreshToken, {
