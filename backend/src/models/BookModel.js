@@ -8,11 +8,7 @@ const { DataTypes } = Sequelize;
 const Book = db.define('books', {
     id_user: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'users', // Sesuaikan dengan nama tabel user
-            key: 'id_user', // Sesuaikan dengan nama kolom primary key di tabel user
-        },
+        allowNull: false,
     },
     id: {
         type: DataTypes.INTEGER,
@@ -48,6 +44,14 @@ const Book = db.define('books', {
     },
     small_image_url: {
         type: DataTypes.STRING,
+        allowNull: false,
+    },
+    isBookmarked: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    isCurrentlyReading: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
 }, {
