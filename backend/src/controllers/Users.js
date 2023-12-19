@@ -12,7 +12,7 @@ export const getUsers = async (req, res) => {
         } else {
             // Jika belum login, tampilkan semua data pengguna
             const users = await Users.findAll({
-                attributes: ['id', 'name', 'email']
+                attributes: ['id_user', 'name', 'email']
             });
             res.json(users);
         }
