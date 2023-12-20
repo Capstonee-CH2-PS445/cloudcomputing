@@ -52,7 +52,7 @@ export const Register = async (req, res) => {
             password: hashPassword
         });
 
-        res.json({ msg: "Register Berhasil" });
+        res.status(201).json({ msg: "Register Berhasil" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Terjadi kesalahan server" });
@@ -66,31 +66,52 @@ export const Login = async (req, res) => {
                 email: req.body.email
             }
         });
+        
+        if (!user || user.length === 0) {
+            return res.status(400).json({ msg: "User not found" });
+        }
+
         const match = await bcrypt.compare(req.body.password, user[0].password);
-        if (!match) return res.status(400).json({ msg: "Wrong Password" });
+        
+        if (!match) {
+            return res.status(400).json({ msg: "Wrong Password" });
+        }
+
         const userId = user[0].id_user;
         const name = user[0].name;
         const email = user[0].email;
-        const accessToken = jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '12h'
-        });
+
+        // Add user_id and username to the response
+        const response = {
+            user_id: userId,
+            username: name,
+            accessToken: jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '12h'
+            })
+        };
+
         const refreshToken = jwt.sign({ userId, name, email }, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
         });
+
         await Users.update({ refresh_token: refreshToken }, {
             where: {
                 id_user: userId
             }
         });
+
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({ accessToken });
+
+        // Send the modified response
+        res.json(response);
     } catch (error) {
         res.status(404).json({ msg: "Email tidak ditemukan" });
     }
 }
+
 
 export const Logout = async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
@@ -101,10 +122,10 @@ export const Logout = async (req, res) => {
         }
     });
     if (!user[0]) return res.sendStatus(204);
-    const userId = user[0].id;
+    const userId = user[0].id_user;
     await Users.update({ refresh_token: null }, {
         where: {
-            id: userId
+            id_user: userId
         }
     });
     res.clearCookie('refreshToken');
