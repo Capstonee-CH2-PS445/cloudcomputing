@@ -1,14 +1,14 @@
 import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
-import { verifyToken } from "../middleware/VerifyToken.js";
+import { verifyToken, urlencodedMiddleware } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 import { getBooks, getBookById } from "../controllers/BookController.js";
-import { addBookmark , removeBookmark} from "../controllers/BookmarkController.js";
+import { addBookmark, removeBookmark } from "../controllers/BookmarkController.js";
 const router = express.Router();
 
 // akun
 router.get('/users', verifyToken, getUsers);
-router.post('/regist', Register);
+router.post('/regist', urlencodedMiddleware, Register);
 router.post('/login', Login);
 router.post('/refreshToken', refreshToken);
 router.delete('/logout', Logout);
