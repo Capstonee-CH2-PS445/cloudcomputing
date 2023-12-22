@@ -6,7 +6,11 @@ export const getBooks = async (req, res) => {
         const books = await Book.findAll({
             attributes: ["id_user", "id", "book_id", "isbn", "authors", "original_publication_year", "title", "average_rating", "ratings_count", "small_image_url"]
         });
-        res.json(books);
+        res.json({
+            error: false,
+            message: "buku berhasil",
+            listbook: books
+        });
     } catch (error) {
         console.error(error); // Tambahkan log error di sini
         res.status(500).json({ msg: "Terjadi kesalahan server" });

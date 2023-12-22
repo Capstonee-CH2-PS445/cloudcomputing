@@ -9,7 +9,7 @@ const router = express.Router();
 // akun
 router.get('/users', verifyToken, getUsers);
 router.post('/regist', urlencodedMiddleware, Register);
-router.post('/login', Login);
+router.post('/login', urlencodedMiddleware, Login);
 router.post('/refreshToken', refreshToken);
 router.delete('/logout', Logout);
 // buku
