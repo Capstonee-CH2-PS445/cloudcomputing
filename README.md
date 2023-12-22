@@ -28,8 +28,9 @@
   ```
   {
     "username": "user12",
+    "email": "user321@example.com",
     "password": "user321",
-    "email": "user321@example.com"
+    "confPassword": "user321"
   }
   ```
 
@@ -37,8 +38,7 @@
 
   ```
   {
-    "error": false,
-    "message": '"Register Berhasil"'
+    "message": "Register Berhasil"
   }
   ```
 
