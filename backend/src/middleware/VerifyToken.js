@@ -28,6 +28,6 @@ export const verifyToken = (req, res, next) => {
 
 import bodyParser from 'body-parser';
 
-// Middleware untuk menghandle formulir URL-encoded
+// Middleware to handle URL-encoded forms
 export const urlencodedMiddleware = bodyParser.urlencoded({ extended: true });
 

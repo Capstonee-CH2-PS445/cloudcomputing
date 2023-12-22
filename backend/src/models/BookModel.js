@@ -1,4 +1,3 @@
-// BookModel.js
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import Users from "./UserModel.js";
@@ -54,7 +53,7 @@ const Book = db.define('books', {
     freezeTableName: true
 });
 
-// Definisikan relasi dengan User
+// Define the relationship with User
 Book.belongsTo(Users, { foreignKey: 'id_user' });
 
 (async () => {

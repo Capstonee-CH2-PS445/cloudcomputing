@@ -12,7 +12,7 @@ export const getBooks = async (req, res) => {
             listbook: books
         });
     } catch (error) {
-        console.error(error); // Tambahkan log error di sini
+        console.error(error); 
         res.status(500).json({ msg: "Terjadi kesalahan server" });
     }
 };

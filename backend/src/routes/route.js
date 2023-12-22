@@ -6,13 +6,13 @@ import { getBooks, getBookById } from "../controllers/BookController.js";
 import { addBookmark, removeBookmark } from "../controllers/BookmarkController.js";
 const router = express.Router();
 
-// akun
+// account
 router.get('/users', verifyToken, getUsers);
 router.post('/regist', urlencodedMiddleware, Register);
 router.post('/login', urlencodedMiddleware, Login);
 router.post('/refreshToken', refreshToken);
 router.delete('/logout', Logout);
-// buku
+// book
 router.get('/books', getBooks);
 router.get('/books/:bookId', getBookById);
 // bookmark
